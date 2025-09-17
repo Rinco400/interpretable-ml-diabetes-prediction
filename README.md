@@ -240,7 +240,7 @@ Increase max_iter, tune learning rate; scaling already enabled.
 
 ## 📄 Report
 The full scientific report (8–10 pages, LNCS format) is available here:  
-[Interpretable ML for Diabetes Prediction Report (PDF)](reports/Interpretable_Machine_Learning_for_Diabetes_Prediction.pdf)
+[Interpretable ML for Diabetes Prediction Report (PDF)](reports/Interpretable_Machine_Learning_for_Diabetes_Prediction__Balancing_Accuracy_and_Transparency.pdf)
 
 ## References
 
