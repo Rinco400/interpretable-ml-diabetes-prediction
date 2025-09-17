@@ -71,19 +71,21 @@ The goal is to balance **performance** with **explainability**, making results b
 
 interpretable_ml_project/
 ├─ README.md
+├─ LICENSE
 ├─ requirements.txt
 ├─ data/
-│ ├─ pima_diabetes_clean.csv
-│ └─ pima_diabetes_clean_long.csv
+│   ├─ pima_diabetes_clean.csv
+│   └─ pima_diabetes_clean_long.csv
 ├─ outputs/
-│ ├─ figures/ # all plots saved here
-│ └─ metrics/ # metrics.json, crossval_metrics.csv
+│   ├─ figures/      # all plots saved here
+│   └─ metrics/      # metrics.json, crossval_metrics.csv
 ├─ notebooks/
-│ └─ diabetes_interpretability.ipynb # optional
+│   └─ diabetes_interpretability.ipynb  # optional
 └─ src/
-├─ utils.py # data loading/cleaning, split, constants
-├─ train_evaluate.py # training, ROC, confusion matrices, CV
-└─ interpret.py # LIME, SHAP, permutation importance
+    ├─ utils.py           # data loading/cleaning, split, constants
+    ├─ train_evaluate.py  # training, ROC, confusion matrices, CV
+    └─ interpret.py       # LIME, SHAP, permutation importance
+
 
 
 ---
@@ -105,9 +107,9 @@ python -m src.train_evaluate
 
 # 4) Generate interpretability figures (LIME/SHAP/Permutation)
 python -m src.interpret
+```
 
-
-Outputs include
+## Outputs include
 
 outputs/figures/roc_all.png
 
@@ -125,27 +127,27 @@ outputs/metrics/metrics.json, outputs/metrics/crossval_metrics.csv
 
 outputs/figures/class_balance.png
 
-Models & Pipelines
+## Models & Pipelines
 
-Logistic Regression (interpretable)
+# Logistic Regression (interpretable)
 
 Imputer(median) → StandardScaler → LogisticRegression(max_iter=1000)
 
 
-Gradient Boosting (GBM)
+# Gradient Boosting (GBM)
 
 Imputer(median) → GradientBoostingClassifier(
     n_estimators=200, learning_rate=0.05, max_depth=3
 )
 
 
-Neural Network (MLP)
+# Neural Network (MLP)
 
 Imputer(median) → StandardScaler → MLPClassifier(
     hidden_layer_sizes=(64, 32), max_iter=1000
 )
 
-Cross-Validation (Leakage-Safe)
+# Cross-Validation (Leakage-Safe)
 
 Stratified 5-fold CV with shuffling and fixed seed
 
@@ -155,7 +157,7 @@ Metrics per fold: Accuracy, F1 (binary), ROC_AUC (from predict_proba)
 
 Reported as mean ± std across folds; same folds reused for all models
 
-##Results (example values)
+## Results (example values)
 Hold-out (80/20)
 Model	Accuracy	Precision	Recall	F1	ROC-AUC
 LogReg	0.77	0.73	0.58	0.64	0.81
@@ -168,11 +170,11 @@ GBM	0.759 ± 0.025	0.634 ± 0.041	0.835 ± 0.018
 MLP	0.724 ± 0.017	0.605 ± 0.038	0.780 ± 0.012
 Interpretability Tools
 
-#LIME (Local)
+# LIME (Local)
 Explains one prediction by fitting a simple surrogate model around that instance.
 Saved plots: lime_gbm.png, lime_mlp.png.
 
-#SHAP (Local + Global)
+# SHAP (Local + Global)
 Shapley values assign a fair contribution to each feature.
 
 TreeExplainer for GBM (fast, exact-ish for trees)
@@ -180,7 +182,7 @@ TreeExplainer for GBM (fast, exact-ish for trees)
 KernelExplainer for MLP (model-agnostic, with a small background set)
 Saved plots: shap_waterfall_*.png, shap_beeswarm_*.png, shap_bar_*.png.
 
-Permutation Importance (Global)
+# Permutation Importance (Global)
 Measures the drop in performance when a feature is shuffled.
 Saved plots: perm_importance_*.png.
 
@@ -194,7 +196,7 @@ Visualization: Matplotlib, Seaborn
 
 Version Control: Git, GitHub
 
-#Reproducibility & Tips
+## Reproducibility & Tips
 
 Use RANDOM_STATE=42 everywhere (splits, models, sampling)
 
@@ -206,7 +208,7 @@ KernelExplainer: keep background ≤ 100 rows for speed
 
 Increase max_iter for MLP if you see ConvergenceWarning
 
-#Troubleshooting
+## Troubleshooting
 
 ModuleNotFoundError: src
 Run from the project root:
@@ -221,7 +223,7 @@ Already mitigated via discretize_continuous=False and imputing first.
 MLP ConvergenceWarning
 Increase max_iter, tune learning rate; scaling already enabled.
 
-##References
+## References
 
 Ribeiro et al., KDD 2016 — LIME
 
