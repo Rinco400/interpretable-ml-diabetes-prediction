@@ -1,0 +1,21 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# Virtual envs
+.venv/
+venv/
+env/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Outputs (auto-generated)
+outputs/
+!outputs/.keep
+
+# Optional: Jupyter
+*.nbconvert.ipynb
